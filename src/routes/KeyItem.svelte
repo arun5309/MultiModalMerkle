@@ -1,5 +1,5 @@
 <script lang="ts">
-	export let style: string = "";
+	export let style: string = '';
 </script>
 
 <button class="keyitem" {style} on:click><slot /></button>
@@ -10,6 +10,6 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-        border: none;
+		border: none;
 	}
 </style>
