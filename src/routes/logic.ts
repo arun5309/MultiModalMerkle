@@ -1,3 +1,9 @@
+export enum GameState {
+    START,
+    PROGRESS,
+    FINISH
+};
+
 export class Item {
     digit: number;
     color: string;
@@ -6,6 +12,12 @@ export class Item {
         this.digit = digit;
         this.color = color;
     }
+};
+
+export enum Mode {
+    DISPLAY,
+    POSITION_ENTRY,
+    COLOR_ENTRY
 };
 
 function rand_digit(): number {
@@ -41,7 +53,15 @@ function rand_perm(): Uint8Array {
     return array;
 }
 
-const COLORS = ["red", "blue", "green", "#8B8000", "black"];
+const COLORS : Array<string> = ["red", "blue", "green", "#8B8000", "black"];
+export const NCOLORS = COLORS.length;
+
+export function get_ith_color(i: number) : string {
+    if(i < COLORS.length) {
+        return COLORS[i];
+    }
+    return "white";
+}
 
 export function make_random_puzzles(): Array<Array<Item>> {
     let ret = new Array<Array<Item>>();

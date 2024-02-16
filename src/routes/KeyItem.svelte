@@ -2,7 +2,7 @@
 	export let style: string = "";
 </script>
 
-<div class="keyitem" {style}><slot /></div>
+<button class="keyitem" {style} on:click><slot /></button>
 
 <style>
 	.keyitem {
@@ -10,5 +10,6 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
+        border: none;
 	}
 </style>
