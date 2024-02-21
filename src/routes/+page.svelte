@@ -160,9 +160,9 @@
 				mode = Mode.COLOR_ENTRY;
 				break;
 			case Mode.COLOR_ENTRY:
-			    if(value.length >= 4) {
-			        break;
-			    }
+				if (value.length >= 4) {
+					break;
+				}
 				if (!cur_color) {
 					break;
 				}
@@ -188,7 +188,15 @@
 <h1>Multi-Modal Merkle PIN Entry</h1>
 
 {#if game_state === GameState.START}
-	<input type="text" placeholder="User ID" bind:value={uid} on:change={normalize} maxlength="6" name="userid" id="userid" />
+	<input
+		type="text"
+		placeholder="User ID"
+		bind:value={uid}
+		on:change={normalize}
+		maxlength="6"
+		name="userid"
+		id="userid"
+	/>
 	{#if uid_valid}
 		{#await get_points()}
 			<p>Validating User ID...</p>
@@ -207,22 +215,24 @@
 	<br />
 	<button on:click={progress_transition}>Start Game</button>
 {:else if game_state === GameState.PROGRESS}
-	<h2>Round: {round}</h2>
-	<br />
+	{#if round < 5}
+		<h2>Round: {round}</h2>
+		<br />
 
-	<div>
-		Cur Pos: {to_pos_num(cur_pos)}
-		Cur Color:
-		<div style="background: {get_ith_color(to_color_num(cur_color))};" class="colorbox"></div>
-	</div>
-	<br />
+		<div>
+			<!-- Cur Pos: {to_pos_num(cur_pos)} -->
+			Selected Color:
+			<div style="background: {get_ith_color(to_color_num(cur_color))};" class="colorbox"></div>
+		</div>
+		<br />
 
-	<!-- Useful for debugging! 
+		<!-- Useful for debugging! 
 		<div>PIN Cur: {value}</div>
 		<br /> 
 	-->
 
-	<Keypad {keys} {mode} {bkspc_handler} {enter_handler} {press_handler} />
+		<Keypad bind:cur_pos {keys} {mode} {bkspc_handler} {enter_handler} {press_handler} />
+	{/if}
 {:else}
 	{#if show_pin}
 		<div>Entered PIN: {pin}</div>

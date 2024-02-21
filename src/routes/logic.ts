@@ -67,7 +67,7 @@ function rand_perm(): Uint8Array {
 	return array;
 }
 
-const COLORS: Array<string> = ['red', 'blue', 'green', '#8B8000', 'black'];
+const COLORS: Array<string> = ['red', 'magenta', 'blue']; // , '#dad000', 'black'];
 export const NCOLORS = COLORS.length;
 
 export function get_ith_color(i: number): string {

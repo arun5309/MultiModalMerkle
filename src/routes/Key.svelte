@@ -7,7 +7,7 @@
 
 <div class="key">
 	{#each items as item}
-		<KeyItem style="color: {item.color};">{item.digit}</KeyItem>
+		<KeyItem style="color: {item.color};"> <div class="digit"> {item.digit} </div> </KeyItem>
 	{/each}
 </div>
 
@@ -18,5 +18,9 @@
 		grid-auto-rows: minmax(11px, auto);
 		border-style: solid;
 		background: white;
+	}
+
+	.digit {
+		font-size: 2em;
 	}
 </style>
