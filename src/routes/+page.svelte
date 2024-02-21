@@ -43,6 +43,11 @@
 		}
 	}
 
+	function to_pos_num(val: string): number {
+		if (val === '') return -1;
+		return (Number(val) + 1) % 10;
+	}
+
 	let uid: string = '';
 	let uid_valid: boolean = false;
 	$: uid_valid = check_uid_valid(uid);
@@ -123,7 +128,7 @@
 		const url = 'https://142.93.219.243.nip.io/update_instance';
 		const data = {
 			iid_value: iid,
-			result_pin: pin
+			result_pin: value
 		};
 		const request = new Request(url, {
 			method: 'POST',
@@ -203,7 +208,7 @@
 	<br />
 
 	<div>
-		Cur Pos: {cur_pos}
+		Cur Pos: {to_pos_num(cur_pos)}
 		Cur Color:
 		<div style="background: {get_ith_color(to_color_num(cur_color))};" class="colorbox"></div>
 	</div>
