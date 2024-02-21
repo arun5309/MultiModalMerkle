@@ -98,7 +98,7 @@
 	}
 
 	function check_uid_valid(uid_cand: string): boolean {
-		return uid_cand.length == 6 && isAlphaNumeric(uid_cand);
+		return uid_cand.length === 6 && isAlphaNumeric(uid_cand);
 	}
 
 	function progress_transition() {
@@ -160,11 +160,14 @@
 				mode = Mode.COLOR_ENTRY;
 				break;
 			case Mode.COLOR_ENTRY:
+			    if(value.length >= 4) {
+			        break;
+			    }
 				if (!cur_color) {
 					break;
 				}
 				value = value + String(keys[Number(cur_pos)][to_color_num(cur_color)].digit);
-				if (value.length == 4) {
+				if (value.length === 4) {
 					finish_transition();
 					break;
 				}
@@ -185,7 +188,7 @@
 <h1>Multi-Modal Merkle PIN Entry</h1>
 
 {#if game_state === GameState.START}
-	<input type="text" placeholder="User ID" bind:value={uid} on:change={normalize} maxlength="6" />
+	<input type="text" placeholder="User ID" bind:value={uid} on:change={normalize} maxlength="6" name="userid" id="userid" />
 	{#if uid_valid}
 		{#await get_points()}
 			<p>Validating User ID...</p>
