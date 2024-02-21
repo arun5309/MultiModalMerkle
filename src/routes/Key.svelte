@@ -7,7 +7,7 @@
 
 <div class="key">
 	{#each items as item}
-		<KeyItem style="color: {item.color};"> <div class="digit"> {item.digit} </div> </KeyItem>
+		<KeyItem style="color: {item.color};"><div class="digit">{item.digit}</div></KeyItem>
 	{/each}
 </div>
 

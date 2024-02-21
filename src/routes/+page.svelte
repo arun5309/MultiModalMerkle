@@ -43,11 +43,6 @@
 		}
 	}
 
-	function to_pos_num(val: string): number {
-		if (val === '') return -1;
-		return (Number(val) + 1) % 10;
-	}
-
 	let uid: string = '';
 	let uid_valid: boolean = false;
 	$: uid_valid = check_uid_valid(uid);
