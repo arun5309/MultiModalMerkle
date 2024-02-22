@@ -2,7 +2,7 @@
 	import type { GetPointsResponse, CreateInstanceResponse, UpdateInstanceResponse } from './logic';
 	import { make_random_puzzles, Mode, GameState, NCOLORS, get_ith_color } from './logic';
 	import Keypad from './Keypad.svelte';
-	let banner = "../src/routes/Banners_Hue_Hunt.jpg"
+	import banner from '$lib/images/Banners_Hue_Hunt.png';
 
 	let game_state = GameState.START;
 	let keys = make_random_puzzles();
@@ -202,8 +202,8 @@
 
 {#if game_state === GameState.START}
 	<!-- <h1>Multi-Modal Merkle PIN Entry</h1> -->
-	<img src = {banner} alt="Hue Hunt"/>
-	<br>
+	<img src={banner} alt="Hue Hunt" />
+	<br />
 	<input
 		type="text"
 		placeholder="User ID"
@@ -260,8 +260,8 @@
 	{/if}
 {:else}
 	<!-- <h1>Multi-Modal Merkle PIN Entry</h1> -->
-	<img src = {banner} alt="Hue Hunt"/>
-	<br>
+	<img src={banner} alt="Hue Hunt" />
+	<br />
 	{#if show_pin}
 		<div>Entered PIN: {pin}</div>
 	{/if}
@@ -293,9 +293,6 @@
 {/if}
 
 <style>
-	h1 {
-		width: 100%;
-	}
 	h2 {
 		width: 100%;
 		display: flex;
