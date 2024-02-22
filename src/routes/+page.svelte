@@ -12,6 +12,7 @@
 	$: pin = value;
 	let round: number;
 	$: round = value.length + 1;
+	let round_per_digit = 0;
 
 	let show_pin = false;
 	let cur_pos: string = '';
@@ -55,6 +56,7 @@
 		mode = Mode.DISPLAY;
 		cur_pos = '';
 		cur_color = '';
+		round_per_digit = 0;
 
 		game_state = GameState.START;
 		show_pin = false;
@@ -172,6 +174,21 @@
 				cur_color = '';
 				break;
 		}
+		round_per_digit += 1;
+		// console.log(mode)
+	}
+	function gameHeader(num: number) {
+		if (num === 1) {
+			return '1st';
+		} else if (num === 2) {
+			return '2nd';
+		} else if (num === 3) {
+			return '3rd';
+		} else if (num == 4) {
+			return '4th';
+		} else {
+			console.log('some number>4 passed into gameHeader function');
+		}
 	}
 </script>
 
@@ -180,9 +197,10 @@
 	<meta name="description" content="MMM PIN Entry" />
 </svelte:head>
 
-<h1>Multi-Modal Merkle PIN Entry</h1>
+<!-- <h1>Multi-Modal Merkle PIN Entry</h1> -->
 
 {#if game_state === GameState.START}
+	<h1>Multi-Modal Merkle PIN Entry</h1>
 	<input
 		type="text"
 		placeholder="User ID"
@@ -211,24 +229,34 @@
 	<button on:click={progress_transition}>Start Game</button>
 {:else if game_state === GameState.PROGRESS}
 	{#if round < 5}
-		<h2>Round: {round}</h2>
-		<br />
+		<h2 style="font-size:1.3em;">
+			<strong>{gameHeader(round)} digit</strong>&#160;| Round {(round_per_digit % 3) + 1}
+		</h2>
 
-		<div>
-			<!-- Cur Pos: {to_pos_num(cur_pos)} -->
-			Selected Color:
-			<div style="background: {get_ith_color(to_color_num(cur_color))};" class="colorbox"></div>
-		</div>
-		<br />
-
+		{#if mode === Mode.COLOR_ENTRY}
+			<div>
+				<!-- Cur Pos: {to_pos_num(cur_pos)} -->
+				Selected Color:
+				<div style="background: {get_ith_color(to_color_num(cur_color))};" class="colorbox"></div>
+			</div>
+		{/if}
 		<!-- Useful for debugging! 
 		<div>PIN Cur: {value}</div>
 		<br /> 
 	-->
-
 		<Keypad bind:cur_pos {keys} {mode} {bkspc_handler} {enter_handler} {press_handler} />
+		<h2 style="font-size:1.2em;text-align:center;">
+			{(round_per_digit % 3) + 1 === 1
+				? 'Find your digit. Remember the Location and Color. Press Enter.'
+				: (round_per_digit % 3) + 1 === 2
+					? 'Select the Location'
+					: (round_per_digit % 3) + 1 === 3
+						? 'Select the Color'
+						: ''}
+		</h2>
 	{/if}
 {:else}
+	<h1>Multi-Modal Merkle PIN Entry</h1>
 	{#if show_pin}
 		<div>Entered PIN: {pin}</div>
 	{/if}
