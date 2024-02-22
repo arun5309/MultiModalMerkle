@@ -2,6 +2,7 @@
 	import type { GetPointsResponse, CreateInstanceResponse, UpdateInstanceResponse } from './logic';
 	import { make_random_puzzles, Mode, GameState, NCOLORS, get_ith_color } from './logic';
 	import Keypad from './Keypad.svelte';
+	let banner = "../src/routes/Banners_Hue_Hunt.jpg"
 
 	let game_state = GameState.START;
 	let keys = make_random_puzzles();
@@ -193,14 +194,16 @@
 </script>
 
 <svelte:head>
-	<title>MMM PIN Entry</title>
+	<title>Hue Hunt PIN Entry</title>
 	<meta name="description" content="MMM PIN Entry" />
 </svelte:head>
 
 <!-- <h1>Multi-Modal Merkle PIN Entry</h1> -->
 
 {#if game_state === GameState.START}
-	<h1>Multi-Modal Merkle PIN Entry</h1>
+	<!-- <h1>Multi-Modal Merkle PIN Entry</h1> -->
+	<img src = {banner} alt="Hue Hunt"/>
+	<br>
 	<input
 		type="text"
 		placeholder="User ID"
@@ -256,7 +259,9 @@
 		</h2>
 	{/if}
 {:else}
-	<h1>Multi-Modal Merkle PIN Entry</h1>
+	<!-- <h1>Multi-Modal Merkle PIN Entry</h1> -->
+	<img src = {banner} alt="Hue Hunt"/>
+	<br>
 	{#if show_pin}
 		<div>Entered PIN: {pin}</div>
 	{/if}
